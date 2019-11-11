@@ -1,30 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-
-/* eslint-env browser */
-
-/**
- * Add detected object info as a row in the table.
- * @param {Object} table
- * @param {string} cellType
- * @param {[]} values
- */
 function addRow(table, cellType, values) {
   const row = document.createElement('tr');
   for (let i = 0; i < values.length; i++) {
@@ -37,11 +10,6 @@ function addRow(table, cellType, values) {
   table.appendChild(row);
 }
 
-/**
- * Create and populate a table to show the result details.
- * @param {[]} detectedObjects
- * @param {Object} parent
- */
 function detectedObjectsTable(detectedObjects, parent) {
   if (detectedObjects.length > 0) {
     const table = document.createElement('table');
@@ -62,12 +30,7 @@ function detectedObjectsTable(detectedObjects, parent) {
 window.addEventListener('load', function() {
   const article = document.querySelector('article');
 
-  /**
-   * Populate the article with formatted results.
-   * @param {Object} jsonResult
-   */
   function populateArticle(jsonResult) {
-    // Remove previous results
     article.innerHTML = '';
 
     if (jsonResult.hasOwnProperty('data')) {
@@ -84,7 +47,6 @@ window.addEventListener('load', function() {
       const myTitle = document.createElement('h3');
       myTitle.textContent = 'ERROR';
       myDiv.appendChild(myTitle);
-      // Dump keys/values to show error info
       for (const key in jsonResult) {
         if (jsonResult.hasOwnProperty(key)) {
           const myP = document.createElement('p');
@@ -96,10 +58,10 @@ window.addEventListener('load', function() {
     }
   }
 
-  // When upload results are loaded (hidden), use them build the results.
+
   const raw = top.frames['mytarget'];
   const myTarget = document.getElementById('mytarget');
-  if (myTarget) { // optional for tests
+  if (myTarget) {
     myTarget.addEventListener('load', function() {
       let rawContent = raw.document.body.innerText;
       console.log(rawContent);
